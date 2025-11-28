@@ -1,0 +1,23 @@
+[package]
+name = "nova-autoreset-event"
+version = "0.1.0"
+edition = "2024"
+authors = ["Tim Blechmann <tim@klingt.org>"]
+description = "A cross-platform autoreset event"
+license = "MIT"
+repository = "https://github.com/timblechmann/nova-autoreset-event"
+documentation = "https://docs.rs/nova-autoreset-event"
+keywords = ["event", "autoreset", "sync"]
+categories = ["concurrency", "os"]
+exclude = [".idea", ".git", ".gitignore", ".pre-commit-config.yaml"]
+
+[dependencies]
+
+[target.'cfg(unix)'.dependencies]
+libc = "0.2"
+
+[target.'cfg(windows)'.dependencies]
+winapi = { version = "0.3", features = ["synchapi", "handleapi", "errhandlingapi", "winbase", "winerror"] }
+
+[dev-dependencies]
+tokio = { version = "1", features = ["rt-multi-thread", "macros", "net"] }
